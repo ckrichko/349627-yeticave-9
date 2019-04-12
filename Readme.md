@@ -1,7 +1,7 @@
 # Личный проект «YetiCave»
 
 * Студент: [Константин Кричко](https://up.htmlacademy.ru/php/9/user/349627).
-* Наставник: [Олег Скляров](https://vk.com/oleg.sklyarov).
+* Наставник: [Олег Скляров](https://htmlacademy.ru/profile/id926687).
 
 ---
 
