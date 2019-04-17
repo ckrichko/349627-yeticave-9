@@ -44,11 +44,11 @@ $lots = [
   ]
 ];
 
-function formatCurrency($number)
+function formatCurrency($price)
 {
-  $roundedNumber = ceil($number);
-  $roundedNumber = number_format($roundedNumber, 0, '.', ' ');
-  return $roundedNumber;
+  $roundedPrice = ceil($price);
+  $roundedPrice = number_format($roundedPrice, 0, '.', ' ');
+  return $roundedPrice;
 }
 
 ?>
