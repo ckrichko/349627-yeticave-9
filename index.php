@@ -1,4 +1,10 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require_once('functions.php');
+
 $is_auth = rand(0, 1);
 
 $user_name = 'Константин';
@@ -44,6 +50,7 @@ $lots = [
   ]
 ];
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
@@ -117,7 +124,7 @@ $lots = [
                   <div class="lot__state">
                     <div class="lot__rate">
                       <span class="lot__amount">Стартовая цена</span>
-                      <span class="lot__cost"><?= $lot['price']; ?><b class="rub">р</b></span>
+                      <span class="lot__cost"><?= formatCurrency($lot['price']); ?><b class="rub">р</b></span>
                     </div>
                     <div class="lot__timer timer">
                       12:23
