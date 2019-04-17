@@ -46,10 +46,9 @@ $lots = [
 
 function formatCurrency($number)
 {
-  ceil($number);
-  $number = number_format($number, 0, '.', ' ');
-  $number .= ' <b class="rub">р</b>';
-  return $number;
+  $roundedNumber = ceil($number);
+  $roundedNumber = number_format($roundedNumber, 0, '.', ' ');
+  return $roundedNumber;
 }
 
 ?>
@@ -126,7 +125,7 @@ function formatCurrency($number)
                   <div class="lot__state">
                     <div class="lot__rate">
                       <span class="lot__amount">Стартовая цена</span>
-                      <span class="lot__cost"><?= formatCurrency($lot['price']); ?></span>
+                      <span class="lot__cost"><?= formatCurrency($lot['price']); ?><b class="rub">р</b></span>
                     </div>
                     <div class="lot__timer timer">
                       12:23
