@@ -1,4 +1,7 @@
 <?php
+
+require_once('/functions.php');
+
 $is_auth = rand(0, 1);
 
 $user_name = 'Константин';
@@ -43,15 +46,8 @@ $lots = [
     'url' => 'img/lot-6.jpg'
   ]
 ];
-
-function formatCurrency($price)
-{
-  $roundedPrice = ceil($price);
-  $roundedPrice = number_format($roundedPrice, 0, '.', ' ');
-  return $roundedPrice;
-}
-
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
   <head>
