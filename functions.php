@@ -7,7 +7,7 @@ function formatCurrency($price)
   return $roundedPrice;
 }
 
-function timeToEnd($end_time)
+function getTimeFormattedTillEnd($end_time)
 {
   $now = date_create();
   $end_time = date_create($end_time);

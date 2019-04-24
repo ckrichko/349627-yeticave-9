@@ -31,7 +31,7 @@
             </div>
             <div
               class="lot__timer timer <?php if (isTimeTillEndLessThanOneHour($lot['time'])): ?>timer--finishing<?php endif; ?>">
-              <?= timeToEnd($lot['time']) ?>
+              <?= getTimeFormattedTillEnd($lot['time']) ?>
             </div>
           </div>
         </div>
