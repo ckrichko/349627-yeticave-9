@@ -30,7 +30,7 @@
               <span class="lot__cost"><?= formatCurrency($lot['price']); ?><b class="rub">р</b></span>
             </div>
             <div
-              class="lot__timer timer <?php if (timeToEndLessOneHour($lot['time'])): ?>timer--finishing<?php endif; ?>">
+              class="lot__timer timer <?php if (isTimeTillEndLessThanOneHour($lot['time'])): ?>timer--finishing<?php endif; ?>">
               <?= timeToEnd($lot['time']) ?>
             </div>
           </div>

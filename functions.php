@@ -15,7 +15,7 @@ function timeToEnd($end_time)
   return $interval->format('%H:%I');
 }
 
-function timeToEndLessOneHour($end_time)
+function isTimeTillEndLessThanOneHour($end_time)
 {
   $now = time();
   $end_time = strtotime($end_time);
