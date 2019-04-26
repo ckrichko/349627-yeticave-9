@@ -3,34 +3,33 @@ CREATE DATABASE yeticave
   COLLATE utf8_general_ci;
 USE yeticave;
 
-CREATE TABLE category
+CREATE TABLE categories
 (
   id          INT         NOT NULL AUTO_INCREMENT,
-  name        VARCHAR(50) NOT NULL,
-  symbol_code VARCHAR(50) NOT NULL,
+  name        VARCHAR(64) NOT NULL UNIQUE,
+  symbol_code VARCHAR(64) NOT NULL UNIQUE,
   PRIMARY KEY (id)
 );
 
-CREATE TABLE user
+CREATE TABLE users
 (
-  id       INT          NOT NULL AUTO_INCREMENT,
-  email    VARCHAR(50)  NOT NULL,
-  password VARCHAR(50)  NOT NULL,
-  name     VARCHAR(50)  NOT NULL,
-  contact  VARCHAR(255) NOT NULL,
-  avatar   VARCHAR(50),
-  reg_date DATETIME              DEFAULT NOW(),
+  id         INT         NOT NULL AUTO_INCREMENT,
+  email      VARCHAR(64) NOT NULL,
+  password   VARCHAR(64) NOT NULL,
+  name       VARCHAR(64) NOT NULL,
+  contact    TEXT(255)   NOT NULL,
+  avatar_url VARCHAR(255),
+  created_at   DATETIME             DEFAULT NOW(),
   PRIMARY KEY (id),
-  INDEX (password),
-  UNIQUE INDEX (name, email)
+  UNIQUE INDEX (email)
 );
 
 CREATE TABLE lot
 (
   id            INT          NOT NULL AUTO_INCREMENT,
-  name          VARCHAR(50)  NOT NULL,
-  description   VARCHAR(200) NOT NULL,
-  image         VARCHAR(50)  NOT NULL,
+  name          VARCHAR(255) NOT NULL,
+  description   TEXT(1024)   NOT NULL,
+  image_url     VARCHAR(255) NOT NULL,
   id_category   INT          NOT NULL,
   start_price   INT          NOT NULL,
   end_date      DATETIME     NOT NULL,
@@ -39,8 +38,8 @@ CREATE TABLE lot
   id_creator    INT          NOT NULL,
   id_winner     INT,
   PRIMARY KEY (id),
-  FOREIGN KEY (id_creator) REFERENCES user (id),
-  FOREIGN KEY (id_category) REFERENCES category (id),
+  FOREIGN KEY (id_creator) REFERENCES users (id),
+  FOREIGN KEY (id_category) REFERENCES categories (id),
   INDEX (end_date, id_creator, id_winner)
 );
 
@@ -52,7 +51,7 @@ CREATE TABLE bid
   id_user       INT NOT NULL,
   id_lot        INT NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (id_user) REFERENCES user (id),
+  FOREIGN KEY (id_user) REFERENCES users (id),
   FOREIGN KEY (id_lot) REFERENCES lot (id),
   INDEX (id_user, id_lot)
 )
