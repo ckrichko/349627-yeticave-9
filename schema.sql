@@ -14,21 +14,21 @@ CREATE TABLE categories
 CREATE TABLE users
 (
   id         INT         NOT NULL AUTO_INCREMENT,
-  email      VARCHAR(64) NOT NULL,
+  email      VARCHAR(64) NOT NULL UNIQUE,
   password   VARCHAR(64) NOT NULL,
   name       VARCHAR(64) NOT NULL,
-  contact    TEXT(255)   NOT NULL,
+  contact    TEXT        NOT NULL,
   avatar_url VARCHAR(255),
   created_at DATETIME             DEFAULT NOW(),
   PRIMARY KEY (id),
-  UNIQUE INDEX (email)
+  INDEX (email)
 );
 
 CREATE TABLE lot
 (
   id          INT          NOT NULL AUTO_INCREMENT,
   name        VARCHAR(255) NOT NULL,
-  description TEXT(1024)   NOT NULL,
+  description TEXT         NOT NULL,
   image_url   VARCHAR(255) NOT NULL,
   category_id INT          NOT NULL,
   start_price INT          NOT NULL,
