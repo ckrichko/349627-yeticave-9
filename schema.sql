@@ -20,8 +20,7 @@ CREATE TABLE users
   contact    TEXT        NOT NULL,
   avatar_url VARCHAR(255),
   created_at DATETIME             DEFAULT NOW(),
-  PRIMARY KEY (id),
-  INDEX (email)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE lot
@@ -39,8 +38,7 @@ CREATE TABLE lot
   winner_id   INT,
   PRIMARY KEY (id),
   FOREIGN KEY (creator_id) REFERENCES users (id),
-  FOREIGN KEY (category_id) REFERENCES categories (id),
-  INDEX (end_at, creator_id, winner_id)
+  FOREIGN KEY (category_id) REFERENCES categories (id)
 );
 
 CREATE TABLE bid
@@ -52,6 +50,5 @@ CREATE TABLE bid
   lot_id     INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES users (id),
-  FOREIGN KEY (lot_id) REFERENCES lot (id),
-  INDEX (user_id, lot_id)
+  FOREIGN KEY (lot_id) REFERENCES lot (id)
 )
