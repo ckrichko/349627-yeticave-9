@@ -15,3 +15,27 @@ INSERT INTO lots
 
 INSERT INTO bids
 (id, amount, created_at, user_id, lot_id) VALUES ('1', '15000', '1', '1'), ('2', '165000', '2', '2');
+
+/* получить все категории */
+SELECT * FROM categories;
+
+/* получить самые новые, открытые лоты. Каждый лот включает название, стартовую цену, ссылку на изображение, цену, название категории */
+SELECT l.name, l.start_price, l.img_url, c.name, b.amount FROM lots AS l
+    LEFT JOIN categories AS c ON l.category_id = c.id
+		LEFT JOIN bids AS b ON l.category_id = b.id
+    WHERE l.winner_id IS NULL
+		ORDER BY l.created_at DESC
+		LIMIT 6;
+
+/* показать лот по его id и название категории, к которой он принадлежит */
+SELECT l.id, l.name, c.name FROM lots AS l
+    LEFT JOIN categories AS c ON l.category_id = c.id
+    WHERE l.id = 1;
+
+/* обновить название лота по его идентификатору */
+UPDATE lots SET name = 'Новое имя лота'
+    WHERE id = 1;
+
+/* получить список самых свежих ставок для лота по его идентификатору */
+SELECT id, amount FROM bids
+    WHERE lot_id = 1;
