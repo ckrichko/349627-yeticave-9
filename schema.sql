@@ -5,9 +5,9 @@ USE yeticave;
 
 CREATE TABLE categories
 (
-  id          INT         NOT NULL AUTO_INCREMENT,
-  name        VARCHAR(64) NOT NULL UNIQUE,
-  symbol_code VARCHAR(64) NOT NULL UNIQUE,
+  id   INT         NOT NULL AUTO_INCREMENT,
+  name VARCHAR(64) NOT NULL UNIQUE,
+  code VARCHAR(64) NOT NULL UNIQUE,
   PRIMARY KEY (id)
 );
 
@@ -23,7 +23,7 @@ CREATE TABLE users
   PRIMARY KEY (id)
 );
 
-CREATE TABLE lot
+CREATE TABLE lots
 (
   id          INT          NOT NULL AUTO_INCREMENT,
   name        VARCHAR(255) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE lot
   FOREIGN KEY (category_id) REFERENCES categories (id)
 );
 
-CREATE TABLE bid
+CREATE TABLE bids
 (
   id         INT NOT NULL AUTO_INCREMENT,
   amount     INT NOT NULL,
@@ -51,5 +51,5 @@ CREATE TABLE bid
   lot_id     INT NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES users (id),
-  FOREIGN KEY (lot_id) REFERENCES lot (id)
+  FOREIGN KEY (lot_id) REFERENCES lots (id)
 )
