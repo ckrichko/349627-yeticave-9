@@ -37,6 +37,7 @@ CREATE TABLE lot
   creator_id  INT          NOT NULL,
   winner_id   INT,
   PRIMARY KEY (id),
+  FOREIGN KEY (winner_id) REFERENCES users (id),
   FOREIGN KEY (creator_id) REFERENCES users (id),
   FOREIGN KEY (category_id) REFERENCES categories (id)
 );
