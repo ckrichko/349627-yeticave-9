@@ -23,7 +23,7 @@ SELECT * FROM categories;
 SELECT l.name, l.start_price, l.img_url, c.name, b.amount FROM lots AS l
     LEFT JOIN categories AS c ON l.category_id = c.id
 		LEFT JOIN bids AS b ON l.category_id = b.id
-    WHERE l.winner_id IS NULL
+    WHERE l.winner_id IS NULL AND l.end_at >= CURRENT_DATE()
 		ORDER BY l.created_at DESC
 		LIMIT 6;
 
