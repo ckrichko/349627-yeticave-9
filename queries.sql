@@ -20,7 +20,7 @@ INSERT INTO bids
 SELECT * FROM categories;
 
 /* получить самые новые, открытые лоты. Каждый лот включает название, стартовую цену, ссылку на изображение, цену, название категории */
-SELECT l.name, l.start_price, l.img_url, c.name, b.amount FROM lots AS l
+SELECT l.name, l.start_price, l.image_url, c.name, b.amount FROM lots AS l
     LEFT JOIN categories AS c ON l.category_id = c.id
 		LEFT JOIN bids AS b ON l.category_id = b.id
     WHERE l.winner_id IS NULL AND l.end_at >= CURRENT_DATE()
