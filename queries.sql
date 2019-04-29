@@ -14,7 +14,7 @@ INSERT INTO lots
 	('6','Маска Oakley Canopy', 'Описание лота №6', 'img/lot-6.jpg', '6', '5400', '2019-04-28', '100', '2');
 
 INSERT INTO bids
-(id, amount, created_at, user_id, lot_id) VALUES ('1', '15000', '1', '1'), ('2', '165000', '2', '2');
+(id, amount, created_at, user_id, lot_id) VALUES ('1', '15000', '2019-04-28', '1', '1'), ('2', '165000', '2019-04-29', '2', '2');
 
 /* получить все категории */
 SELECT * FROM categories;
