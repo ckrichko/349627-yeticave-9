@@ -3,62 +3,26 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once('functions.php');
-require_once('helpers.php');
+require_once('app/functions.php');
+require_once 'app/db.php';
 
 $is_auth = rand(0, 1);
 
 $user_name = 'Константин';
 
-$categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+//  Выполнение запросов в базу данных
+$categories = db_get_categories($link);
 
-$lots = [
-  [
-    'title' => '2014 Rossignol District Snowboard',
-    'category' => 'Доски и лыжи',
-    'price' => 10999,
-    'url' => 'img/lot-1.jpg',
-    'end_at' => 'tomorrow'
-  ],
-  [
-    'title' => 'DC Ply Mens 2016/2017 Snowboard',
-    'category' => 'Доски и лыжи',
-    'price' => 159999,
-    'url' => 'img/lot-2.jpg',
-    'end_at' => 'tomorrow'
-  ],
-  [
-    'title' => 'Крепления Union Contact Pro 2015 года размер L/XL',
-    'category' => 'Крепления',
-    'price' => 8000,
-    'url' => 'img/lot-3.jpg',
-    'end_at' => 'tomorrow'
-  ],
-  [
-    'title' => 'Ботинки для сноуборда DC Mutiny Charocal',
-    'category' => 'Ботинки',
-    'price' => 10999,
-    'url' => 'img/lot-4.jpg',
-    'end_at' => 'tomorrow'
-  ],
-  [
-    'title' => 'Куртка для сноуборда DC Mutiny Charocal',
-    'category' => 'Одежда',
-    'price' => 7500,
-    'url' => 'img/lot-5.jpg',
-    'end_at' => 'tomorrow'
-  ],
-  [
-    'title' => 'Маска Oakley Canopy',
-    'category' => 'Разное',
-    'price' => 5400,
-    'url' => 'img/lot-6.jpg',
-    'end_at' => 'tomorrow'
-  ]
-];
+$lots = db_get_lots($link);
 
-$content = include_template('index.php',
-  ['categories' => $categories, 'lots' => $lots]);
+if ($config['enable']) {
+  $content = include_template('main.php',
+    ['categories' => $categories, 'lots' => $lots]);
+} else {
+  $error = 'Сайт временно недоступен. Ведутся технические работы.';
+  $content = include_template('error.php', ['error' => $error
+  ]);
+}
 
 $layout_content = include_template('layout.php', [
   'title' => 'Главная',
@@ -66,6 +30,7 @@ $layout_content = include_template('layout.php', [
   'user_name' => $user_name,
   'content' => $content,
   'categories' => $categories,
+  'sitename' => $config['sitename']
 ]);
 
 print($layout_content);

@@ -1,8 +1,11 @@
+-- Созданёт базу данных проекта Yeti Cave
 CREATE DATABASE yeticave
   CHARACTER SET UTF8
   COLLATE utf8_general_ci;
-USE yeticave;
 
+USE 'yeticave';
+
+-- создаёт таблицу категорий
 CREATE TABLE categories
 (
   id   INT         NOT NULL AUTO_INCREMENT,
@@ -11,6 +14,7 @@ CREATE TABLE categories
   PRIMARY KEY (id)
 );
 
+-- создаёт таблицу пользователей
 CREATE TABLE users
 (
   id         INT         NOT NULL AUTO_INCREMENT,
@@ -23,6 +27,7 @@ CREATE TABLE users
   PRIMARY KEY (id)
 );
 
+-- создаёт таблицу лотов
 CREATE TABLE lots
 (
   id          INT          NOT NULL AUTO_INCREMENT,
@@ -42,6 +47,7 @@ CREATE TABLE lots
   FOREIGN KEY (category_id) REFERENCES categories (id)
 );
 
+-- создаёт таблицу ставок
 CREATE TABLE bids
 (
   id         INT NOT NULL AUTO_INCREMENT,
