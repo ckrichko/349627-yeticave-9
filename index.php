@@ -10,11 +10,8 @@ $is_auth = rand(0, 1);
 
 $user_name = 'Константин';
 
-//  Выполнение запросов в базу данных
 $categories = get_categories($link);
-
 $lots = get_lots($link);
-
 
 $content = include_template('main.php',
   ['categories' => $categories, 'lots' => $lots]);
