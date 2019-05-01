@@ -11,18 +11,13 @@ $is_auth = rand(0, 1);
 $user_name = 'Константин';
 
 //  Выполнение запросов в базу данных
-$categories = db_get_categories($link);
+$categories = get_categories($link);
 
-$lots = db_get_lots($link);
+$lots = get_lots($link);
 
-if ($config['enable']) {
-  $content = include_template('main.php',
-    ['categories' => $categories, 'lots' => $lots]);
-} else {
-  $error = 'Сайт временно недоступен. Ведутся технические работы.';
-  $content = include_template('error.php', ['error' => $error
-  ]);
-}
+
+$content = include_template('main.php',
+  ['categories' => $categories, 'lots' => $lots]);
 
 $layout_content = include_template('layout.php', [
   'title' => 'Главная',
@@ -30,7 +25,7 @@ $layout_content = include_template('layout.php', [
   'user_name' => $user_name,
   'content' => $content,
   'categories' => $categories,
-  'sitename' => $config['sitename']
+  'sitename' => 'Yeti Cave'
 ]);
 
 print($layout_content);

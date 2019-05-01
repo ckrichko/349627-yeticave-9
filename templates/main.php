@@ -27,11 +27,11 @@
           <div class="lot__state">
             <div class="lot__rate">
               <span class="lot__amount">Стартовая цена</span>
-              <span class="lot__cost"><?= formatCurrency($lot['start_price']); ?><b class="rub">р</b></span>
+              <span class="lot__cost"><?= format_currency($lot['start_price']); ?><b class="rub">р</b></span>
             </div>
             <div
-              class="lot__timer timer <?php if (isTimeTillEndLessThanOneHour($lot['end_at'])): ?>timer--finishing<?php endif; ?>">
-              <?= getTimeFormattedTillEnd($lot['end_at']) ?>
+              class="lot__timer timer <?php if (is_time_till_end_less_than_one_hour($lot['end_at'])): ?>timer--finishing<?php endif; ?>">
+              <?= get_time_formatted_till_end($lot['end_at']) ?>
             </div>
           </div>
         </div>

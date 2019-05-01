@@ -2,17 +2,16 @@
 
 //  Функции
 
-require_once('helpers.php'); //  Подключает дополнительные функции
+require_once('helpers.php');
 
-// Форматирует цену лота
-function formatCurrency($price)
+function format_currency($price)
 {
   $roundedPrice = ceil($price);
   $roundedPrice = number_format($roundedPrice, 0, '.', ' ');
   return $roundedPrice;
 }
 
-function getTimeFormattedTillEnd($end_time)
+function get_time_formatted_till_end($end_time)
 {
   $now = date_create();
   $end_time = date_create($end_time);
@@ -20,7 +19,7 @@ function getTimeFormattedTillEnd($end_time)
   return $interval->format('%H:%I');
 }
 
-function isTimeTillEndLessThanOneHour($end_time)
+function is_time_till_end_less_than_one_hour($end_time)
 {
   $now = time();
   $end_time = strtotime($end_time);
@@ -30,38 +29,32 @@ function isTimeTillEndLessThanOneHour($end_time)
   return false;
 }
 
-// Получает список категорий и классов фоновых изображений
-
-function db_get_categories($link): array
+function fetch_data($link, string $sql): array
 {
-  $categories = [];
-  $sql = 'SELECT * FROM categories';
-  $stmt = mysqli_prepare($link, $sql);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
+  $stmt = db_get_prepare_stmt($link, $sql);
 
-  if ($result) {
-    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  if (!mysqli_stmt_execute($stmt)) {
+    die("Ошибка MySQL: " . mysqli_error($link));
   }
-  return $categories;
+  $result = mysqli_stmt_get_result($stmt);
+  if (!$result) {
+    die("Ошибка MySQL: " . mysqli_error($link));
+  }
+  return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-// Получает список лотов
-
-function db_get_lots($link)
+function get_categories($link): array
 {
-  $sql_lots = "SELECT lots.name AS name, categories.name
-		AS category, start_price, image_url, end_at FROM lots
-		JOIN categories ON categories.id = category_id
-		WHERE end_at > NOW() AND winner_id IS NULL
-		ORDER BY lots.created_at DESC LIMIT 9";
+  $sql_get_categories = 'SELECT `name`, `code` FROM categories';
+  return fetch_data($link, $sql_get_categories);
+}
 
-  $stmt = mysqli_prepare($link, $sql_lots);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
-
-  if ($result) {
-    $lots = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  }
-  return $lots;
+function get_lots($link): array
+{
+  $sql_get_active_lots = "SELECT lots.name AS name, categories.name
+	AS category, start_price, image_url, end_at FROM lots
+	JOIN categories ON categories.id = category_id
+	WHERE end_at > NOW() AND winner_id IS NULL
+	ORDER BY lots.created_at DESC LIMIT 9";
+  return fetch_data($link, $sql_get_active_lots);
 }
