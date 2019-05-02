@@ -10,5 +10,10 @@ $db = [
   "database" => "yeticave"
 ];
 
- $link = mysqli_connect( $db['host'], $db['user'], $db['password'], $db['database'] ) or die( mysqli_connect_error() );
- mysqli_set_charset( $link, "utf8" );
+$link = mysqli_connect($db['host'], $db['user'], $db['password'], $db['database']);
+if (!$link) {
+  die("Ошибка подключения: " . mysqli_connect_error());
+}
+if (!mysqli_set_charset($link, "utf8")) {
+  die("Ошибка подключения: " . mysqli_error($link));
+}
